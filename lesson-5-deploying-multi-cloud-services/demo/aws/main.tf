@@ -69,6 +69,7 @@ resource "aws_route_table_association" "private" {
 }
 
 ##### Your code starts here #####
+
 data "aws_ami" "ubuntu" {
   most_recent = true
 
@@ -88,8 +89,9 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "web" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.micro"
+  subnet_id = aws_subnet.public[0].id
 
   tags = {
-    Name = "HelloWorld"
+    Name = "HelloWorld-Travis"
   }
 }
